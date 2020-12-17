@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  <!--================Home Banner Area =================-->
+  <!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <p>Home / Checkout</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================Checkout Area =================-->
+  <section class="checkout_area section_padding">
+    <div class="container">
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Billing Details</h3>
+            {% for use in userdata %}
+            <form class="row contact_form" action="/data" method="POST" id="checkoutForm">
+              {% csrf_token %}
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="firstname" name="firstname" value="{{use.first_name}}" readonly />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="lastname" name="lastname" value="{{use.last_name}}" readonly  />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="email" name="email" value="{{use.email}}" readonly  />
+                <span class=""></span>
+              </div>
+              {% endfor %} 
+              
+              {% if checkout|length != 0 %}
+                {% for d in checkout %}
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" value="{{d.contact}}" readonly />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" value="{{d.address1}}" readonly />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="add2" value="{{d.address2}}" readonly />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" value="{{d.city}}" readonly />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="state" name="state" value="{{d.state}}" readonly />
+                <span class=""></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="zip" name="zip" value="{{d.zipcode}}" readonly />
+                <span class=""></span>
+              </div>
+                {% endfor %}
+              {% else %}
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" placeholder="Phone number" required/>
+                <span></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" placeholder="Address line 01" required/>
+                <span></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="add2" placeholder="Address line 02"required/>
+                <span ></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Town/City" required/>
+                <span ></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="state" name="state" placeholder="State" required/>
+                <span ></span>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" required/>
+              </div>
+              {% endif %}
+            
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Your Order</h2>
+              <ul class="list">
+                <li>
+                  <a href="#">Product
+                    <span>Total</span>
+                  </a>
+                </li>
+                <li>{% for car,p in zip %}
+                  <a href="#">{{p.product_name}}
+                    <span class="middle">x {{car.quantity}}</span>
+                    <span class="last">{{car.price}}</span>
+                  </a>
+                  {% endfor %}
+                </li>
+              </ul>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Subtotal
+                    <span>Rs. {{subtotal}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Shipping
+                    <span>Flat rate: 100.00</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Total
+                    <span>Rs. {{total}}</span>
+                  </a>
+                </li>
+              </ul>
+              <div class="payment_item">
+                <div class="radion_btn">
+                  <input type="radio" checked id="f-option5" name="selector" />
+                  <label for="f-option5">Cash</label>
+                  <div class="check"></div>
+                </div>
+              </div>
+              <input type="submit" class="btn_3" value="Proceed To Checkout">
+              <!-- <a class="btn_3" href="#">Proceed to Paypal</a> -->
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+{% endblock %}

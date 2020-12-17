@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+<!--================Home Banner Area =================-->
+  <!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+      <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-lg-12">
+                  <div class="breadcrumb_iner">
+                      <div class="breadcrumb_iner_item">
+                          <p><a href="/"> Home</a>/ confirmation </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- breadcrumb start-->
+
+  <!--================ confirmation part start =================-->
+  <section class="confirmation_part section_padding">
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-lg-12">
+          <div class="confirmation_tittle">
+            <span>Thank you. Your order has been received.</span>
+          </div>
+        </div> -->
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>order info</h4>
+            <ul>{% for a in ordernumber %}
+              <li>
+                <p>Order Number</p><span>{{a.id}}</span>
+              </li>
+              <li>
+                <p>Date</p><span>:{{a.date}}</span>
+              </li>
+              <li>{% endfor %}
+                <p>Total</p><span>: USD 2210</span>
+              </li>
+              <li>
+                <p>Payment Methord</p><span>: CASH payment</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>Billing Address</h4>
+            {% for a in checkout %}
+            <ul>
+              <li>
+                <p>Contact Number</p><span>: {{ a.contact }}</span>
+              </li>
+              <li>
+                <p>Street</p><span>: {{ a.address1 }}</span>
+              </li>
+              <li>
+                <p>Area</p><span>: {{ a.address2 }}</span>
+              </li>
+              <li>
+                <p>city</p><span>: {{ a.city }}</span>
+              </li>
+              <li>
+                <p>State</p><span>:{{ a.state }}</span>
+              </li>
+              <li>
+                <p>Zipcode</p><span>: {{ a.zipcode }}</span>
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+        </div>
+       
+      </div>
+      <div class="row">
+        
+        <div class="col-lg-12">
+          <div class="order_details_iner">
+            <h3>Order Details</h3>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="2">Product</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>{% for o in order %}
+                  <th colspan="2"><span>{{o.product}}</span></th>
+                  <th>{{o.quantity}}</th>
+                  <th> <span>Rs. {{o.price}}</span></th>
+                </tr>{% endfor %}
+                
+                <tr>
+                  <th colspan="3">Subtotal</th>
+                  <th> <span>Rs.{{subtotal}}</span></th>
+                </tr>
+                <!-- <tr>
+                  <th colspan="3">shipping</th>
+                  <th><span>flat rate:Rs. 100.00</span></th>
+                </tr> -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="col" colspan="3">Total</th>
+                  <th scope="col">Rs.{{total}}</th>
+                </tr>
+              </tfoot>
+            </table>
+            <h2>your order will be delivered within 5 to 7 working days</h2>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!--================ confirmation part end =================-->
+{% endblock %}

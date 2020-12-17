@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+
+<section class="cart_area section_padding" style="margin-left: 45px;">
+
+    <div>          
+                        <table style="width:100%;font-size: large;">
+                            {% for u in user %}
+                            <p style="font-size: 22px;"><strong>Personal Details</strong></p>
+                            <tr>
+                            <th>Full Name:</th>
+                            <td>{{u.first_name}} {{u.last_name}}</td>
+                            </tr>
+                            <tr>
+                            <th>Email ID:</th>
+                            <td>{{u.email}}</td>
+                            </tr>{% endfor %}
+
+                        </table>
+    </div>
+    <div>
+                        <table style="font-size: large;width:56%;">
+                            <p style="font-size: 22px;"><strong>Address Details</strong></p>
+                            {% for a in checkout %}
+                            <tr>
+                                <th>Mobile number :</th>
+                                <td>{{a.contact}}</td>
+                            </tr>
+                            <tr>
+                            <th>Address 1 :</th>
+                            <td>{{a.address1}}</td>
+                            </tr>   
+                            <tr>
+                            <th>Address 2 :</th>
+                            <td>{{a.address2}}</td>
+                            </tr>
+                            <tr>
+                            <th>City :</th>
+                            <td>{{a.city}}</td>
+                            </tr>
+                            <tr>
+                            <th>State :</th>
+                            <td>{{a.state}}</td>
+                            </tr>
+                            <tr>
+                            <th>Zipcode :</th>
+                            <td>{{a.zipcode}}</td>
+                            </tr>
+                        </table>
+    </div>
+    <div style="margin-top: 15px;">                    
+                            <a class="btn_1" href="/edit_address/{{a.id}}">Edit Address</a>
+                            {% endfor %}
+                            <a class="btn_1" href="/add_address" style="margin-left: 25px;">Add another Address</a>
+    </div>                    
+
+    
+</section>
+
+{% endblock %}
+    

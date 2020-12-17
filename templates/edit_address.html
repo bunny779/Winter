@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+
+<section class="checkout_area section_padding">
+    <div class="container">
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+          <p style="font-size: 25px;"><strong>Edit Address</strong></p><br>
+          {% for d in checkout %}       
+        <form class="row contact_form" action="/update_address/{{d.id}}" method="POST"  >
+            {% csrf_token %}    
+            
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" value="{{d.contact}}" required/>
+                <span></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" value="{{d.address1}}" required/>
+                <span></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="add2" value="{{d.address2}}"required/>
+                <span ></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" value="{{d.city}}" required/>
+                <span ></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="state" name="state" value="{{d.state}}" required/>
+                <span ></span>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="zip" name="zip" value="{{d.zipcode}}" required/>
+              </div>
+                <div> <input type="submit" value="Submit" class = "btn btn-primary"></div>
+            {% endfor %}
+            </form>
+            
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+    

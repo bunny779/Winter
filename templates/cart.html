@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+<link rel="stylesheet" href="{% static 'css/iconstyle.css' %}">
+
+  <!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+      <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-lg-12">
+                  <div class="breadcrumb_iner">
+                      <!-- <div class="breadcrumb_iner_item">
+                        <p><a href="/"> Home /</a><a href="/category"> Category /</a><a href="/category/{{category_name}}"> {{category_name}} /</a><a href="/category/{{category_name}}/{{subcategory_name}}"> {{subcategory_name}}</a></p>                   
+                        <p>Home/Shop/Single product/Cart list</p>
+                      </div> -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- breadcrumb start-->
+  <!--================Cart Area =================-->
+  <section class="cart_area section_padding">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+        {% if total > 0 %}  
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for car,p in zip %}
+              <tr>
+                <td>
+                  
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="{{p.product_image.url}}" height="50px" width="50px" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>{{p.product_name}}</p>
+                    </div>
+                  </div>
+                  
+                </td>
+                <td>
+                  <h5>Rs. {{p.product_price}}</h5>
+                </td>
+                
+/                <td>
+                  <div class="product_count">
+                  <input id= "qt-{{car.id}}" class="input-number" type="number"  value="{{car.quantity}}" min="1" max="10" onchange="changequantity({{car.id}})">
+                  </div>
+                </td>
+                <td>
+                  <h5>Rs. {{car.price}}</h5>
+                </td>
+                <td>
+                  <a href="/delete_cart/{{car.id}}"><i class="material-icons">delete</i></a>
+                </td>
+              </tr>
+              {% endfor %}
+              <!-- <tr class="bottom_button">
+                <td>
+                  <a class="btn_1" href="#">Update Cart</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="cupon_text float-right">
+                    <a class="btn_1" href="#">Close Coupon</a>
+                  </div>
+                </td>
+              </tr> -->
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <h5>Rs.{{total}}</h5>
+                </td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-left">
+            <a class="btn_1" href="/delete_all_cart">Clear Cart</a>
+          </div>
+          <div class="checkout_btn_inner float-right">
+
+            
+            <a class="btn_1" href="/all_product">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="/checkout">Proceed to checkout</a>
+          </div>
+          {% else %}
+          <p style="font-size: 50px;color: brown;">No product available in cart</p>
+        </div>  
+      </div>
+      {% endif %}
+  </section>
+  <script type="text/javascript">
+    function changequantity(id){
+      var quantity = document.getElementById('qt-'+id).value
+
+      data={'cart_id':id,'quantity':quantity}
+
+      $.ajax(
+        {
+          url: '/update_cart',
+          type:'GET',
+          data: data,
+
+          success: function(json){
+            alert('Product quantity Updated');
+            window.location.reload(1);
+          }
+        });
+
+    }
+  </script>      
+  <!--================End Cart Area =================-->
+
+  {% endblock %}
+    

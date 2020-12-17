@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+    
+
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p><a href="/"> Home /</a></p>                 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding border_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Browse Categories</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                {% for cat in category %}
+                                <ul class="list">
+                                    <li>
+                                        <a href="category/{{cat.category_name}}"><h6>{{cat.category_name}}</h6></a>
+                                    </li>
+                            
+                                </ul>
+                                {% endfor %}
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                
+                <div class="col">
+                    <div class="row">
+                        <!-- {% for cat in category %}
+                        <div class="col ">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu product_bar_item">
+                                    <a href="category/{{cat.category_name}}"><h1 style="color: blue;">{{cat.category_name}}</h1></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {% endfor %} -->
+                        {% for p in product %}
+                        <div class="col-lg-4 col-sm-6">
+                            
+                            <div class="single_category_product">
+                               
+                                <div class="single_category_img">
+                                   
+                                    <img src="{{p.product_image.url}}">
+                                    <div class="category_social_icon">
+                                        <ul>
+                                            <li><a href="/single-product/{{p.product_name}}"><i class="ti-move"></i></a></li>
+                                            <li><a href="/add_cart/{{p.id}}"><i class="ti-bag"></i></a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                    <div class="category_product_text">
+                                        <a href="/single-product/{{category_name}}/{{p.product_name}}"><h5>{{p.product_name}}</h5></a>
+                                        <p>Rs.{{p.product_price}}</p>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="col-lg-12 text-center">
+                            <a href="#" class="btn_2">More Items</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+
+    <!-- free shipping here -->
+    <section class="shipping_details section_padding border_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="img/icon/icon_1.png" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="img/icon/icon_2.png" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="img/icon/icon_3.png" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="img/icon/icon_4.png" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- free shipping end -->
+    
+{% endblock %}
